@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -19,20 +21,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String name;
 
     @Column(unique = true)
-    public int npm;
+    private int npm;
 
-    public String typemagang;
-    public String kapal;
-    public String cabang;
-    public String divisi;
-
-    @Column(name = "checkin", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    public LocalDateTime checkin= LocalDateTime.now();
-    @Column(name = "checkout", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    public LocalDateTime checkout=LocalDateTime.now();
+    private String typemagang;
+    private String kapal;
+    private String cabang;
+    private String divisi;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<checkresponse> checkRecords = new ArrayList<>();
+    // Hapus atribut checkin dan checkout
 }
