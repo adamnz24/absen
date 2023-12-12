@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByNpm(int npm);
 
-    User findById(long id);
+    User findById(int Id);
 
 
 }
