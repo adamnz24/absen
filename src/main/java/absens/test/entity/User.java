@@ -5,13 +5,73 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
-
-
+//package absens.test.entity;
+//
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//
+////@Data
+////@AllArgsConstructor
+////@Entity
+////@NoArgsConstructor
+////@Table(name = "user")
+////public class User {
+////
+////    @Id
+////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////
+////    public int npm;
+////
+////    private String name;
+////
+////    public String typemagang;
+////    public String kapal;
+////    public String cabang;
+////    public String divisi;
+////
+//////    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//////    private List<Absensi> absensiList = new ArrayList<>();
+////}
+//@Data
+//@AllArgsConstructor
+//@Entity
+//@NoArgsConstructor
+//@Table(name = "user")
+//public class User {
+//
+//    @Id
+//    @Column(name = "npm")
+//    private int npm;
+//
+//    @Column(name = "name")
+//    private String name;
+//
+//    @Column(name = "typemagang")
+//    private String typemagang;
+//
+//    @Column(name = "kapal")
+//    private String kapal;
+//
+//    @Column(name = "cabang")
+//    private String cabang;
+//
+//    @Column(name = "divisi")
+//    private String divisi;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Absensi> absensiList = new ArrayList<>();
+//}
+//
+//
 @Data
 @AllArgsConstructor
 @Entity
@@ -20,19 +80,13 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-
-    private String name;
-
-    @Column(unique = true)
+    @Column(name = "npm")
     private int npm;
 
-    private String typemagang;
-    private String kapal;
-    private String cabang;
-    private String divisi;
+    @Column(name = "name")
+    private String name;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<checkresponse> checkRecords = new ArrayList<>();
-    // Hapus atribut checkin dan checkout
+    private List<Absensi> absensiList = new ArrayList<>();
 }
+

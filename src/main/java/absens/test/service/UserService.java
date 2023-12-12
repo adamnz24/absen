@@ -50,30 +50,16 @@ public class UserService {
         return userRepository.findAll().toString();
     }
 
-    public User getUserById(long id) {
-        Optional<User> userOptional = Optional.ofNullable(userRepository.findById(id));
+    public User getUserById(int Id) {
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findById(Id));
 
         // Gunakan orElseThrow untuk melempar CustomUserNotFoundException jika user tidak ditemukan
-        return userOptional.orElseThrow(() -> new CustomIllegalArgumentException(" ID Dengan Nomor " + id +" tidak ditemukan"));
+        return userOptional.orElseThrow(() -> new CustomIllegalArgumentException(" ID Dengan Nomor " + Id +" tidak ditemukan"));
     }
 
     // Other methods...
 
-    public User updateUser(@Validated User user) {
-        validateUpdateUser(user);
-        checkDuplicateNpmForUpdate(user.getId(), user.getNpm());
-        User existingUser = userRepository.findById(user.getId());
-
-        if (existingUser != null) {
-            updateUserData(existingUser, user);
-            return userRepository.save(existingUser);
-        } else {
-            // Handle if the user with the given ID is not found
-            return null;
-        }
-    }
-
-    private void checkDuplicateNpmForUpdate(Long id, int npm) {
+    private void checkDuplicateNpmForUpdate(int id, int npm) {
     }
 
     private void validateUpdateUser(User user) {
@@ -81,28 +67,32 @@ public class UserService {
 
     // Other methods...
 
-    public String updateUserData(User existingUser, User newUser) {
-        existingUser.setName(newUser.getName());
-        existingUser.setNpm(newUser.getNpm());
-        existingUser.setTypemagang(newUser.getTypemagang());
-        existingUser.setKapal(newUser.getKapal());
-        existingUser.setCabang(newUser.getCabang());
-        existingUser.setDivisi(newUser.getDivisi());
-        return "Data User Berhasil Perbaharui";
-    }
+//    public String updateUser(User existingUser, User newUser) {
+//        existingUser.setName(newUser.getName());
+//        existingUser.setNpm(newUser.getNpm());
+//        existingUser.setTypemagang(newUser.getTypemagang());
+//        existingUser.setKapal(newUser.getKapal());
+//        existingUser.setCabang(newUser.getCabang());
+//        existingUser.setDivisi(newUser.getDivisi());
+//        return "Data User Berhasil Perbaharui";
+//    }
 
-    public String deleteUser(long id) {
+    public String deleteUser(int Id) {
         // Cari user berdasarkan ID
-        User user = userRepository.findById(id);
+        User user = userRepository.findById(Id);
 
         // Jika user tidak ditemukan, lempar CustomIllegalArgumentException
         if (user == null) {
-            throw new CustomIllegalArgumentException("User with ID " + id + " not found");
+            throw new CustomIllegalArgumentException("User with ID " + Id + " not found");
         }
 
         // Logika penghapusan user
         userRepository.delete(user);
 
-        return "User with ID " + id + " has been successfully deleted ARRIGATOU";
+        return "User with ID " + Id + " has been successfully deleted ARRIGATOU";
     }
+
+    public User updateUser(User user) {
+        return null;
     }
+}
